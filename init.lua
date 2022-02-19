@@ -61,7 +61,8 @@ require('packer').startup(function()
 end)
 
 require'lspconfig'.pyright.setup {}
-require'lspconfig'.ccls.setup {}
+-- require'lspconfig'.ccls.setup {}
+require'lspconfig'.clangd.setup{}
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
@@ -112,13 +113,15 @@ vim.cmd([[
   "nnoremap <silent> <leader>f :Format<CR>
 
   " system clipboard
-nmap <c-c> "+y
-vmap <c-c> "+y
-nmap <c-v> "+p
-inoremap <c-v> <c-r>+
-cnoremap <c-v> <c-r>+
-" use <c-r> to insert original character without triggering things like auto-pairs
-inoremap <c-r> <c-v>
+	nmap <c-c> "+y
+	vmap <c-c> "+y
+	nmap <c-v> "+p
+	inoremap <c-v> <c-r>+
+	cnoremap <c-v> <c-r>+
+	" use <c-r> to insert original character without triggering things like auto-pairs
+	inoremap <c-r> <c-v>
+
+	NvimTreeOpen
   
 ]])
 
@@ -307,7 +310,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = {'pyright', 'rust_analyzer', 'tsserver', "ccls"}
+local servers = {'pyright', 'rust_analyzer', 'tsserver', "clangd"}
 for _, lsp in pairs(servers) do
     require('lspconfig')[lsp].setup {
         on_attach = on_attach,
@@ -389,4 +392,4 @@ cmp.setup.cmdline('/', {
 -- require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
 --  capabilities = capabilities
 
-vim.lsp.buf.formatting()
+--vim.lsp.buf.formatting()
