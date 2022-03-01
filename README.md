@@ -1,5 +1,9 @@
 # My NeoVim Config
 
+## Master branch
+This neovim config works on the Neovim Master branch or (development) versions, although with *some* minor issues. \
+(2 plugins show nil on boot)
+
 ## Installation:
 ```
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
