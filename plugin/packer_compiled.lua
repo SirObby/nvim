@@ -11,7 +11,7 @@ local no_errors, error_msg = pcall(function()
 
   local time
   local profile_info
-  local should_profile = false
+  local should_profile = true
   if should_profile then
     local hrtime = vim.loop.hrtime
     profile_info = {}
@@ -105,8 +105,13 @@ _G.packer_plugins = {
     path = "/home/sir/.local/share/nvim/site/pack/packer/start/cmp-spell",
     url = "https://github.com/f3fora/cmp-spell"
   },
+  ["copilot.vim"] = {
+    loaded = true,
+    path = "/home/sir/.local/share/nvim/site/pack/packer/start/copilot.vim",
+    url = "https://github.com/github/copilot.vim"
+  },
   ["hop.nvim"] = {
-    config = { "\27LuaQ\0\1\4\b\4\b\0!\0\0\0\0\0\0\0@/home/sir/.config/nvim/init.lua\0\24\0\0\0\27\0\0\0\0\0\0\2\b\0\0\0\5\0\0\0A@\0\0\28\0\1\6@\0J@\0\0I\0ﾁ―28@\0\1\30\0\0\5\0\0\0\4\b\0\0\0\0\0\0\0require\0\4\4\0\0\0\0\0\0\0hop\0\4\6\0\0\0\0\0\0\0setup\0\4\5\0\0\0\0\0\0\0keys\0\4\24\0\0\0\0\0\0\0etovxqpdygfblzhckisuran\0\0\0\0\0\b\0\0\0\26\0\0\0\26\0\0\0\26\0\0\0\26\0\0\0\26\0\0\0\26\0\0\0\26\0\0\0\27\0\0\0\0\0\0\0\0\0\0\0" },
+    config = { "\27LuaQ\0\1\4\b\4\b\0!\0\0\0\0\0\0\0@/home/sir/.config/nvim/init.lua\0\21\0\0\0\26\0\0\0\0\0\0\2\b\0\0\0\5\0\0\0A@\0\0\28\0\1\6@\0J@\0\0I\0ﾁ―28@\0\1\30\0\0\5\0\0\0\4\b\0\0\0\0\0\0\0require\0\4\4\0\0\0\0\0\0\0hop\0\4\6\0\0\0\0\0\0\0setup\0\4\5\0\0\0\0\0\0\0keys\0\4\24\0\0\0\0\0\0\0etovxqpdygfblzhckisuran\0\0\0\0\0\b\0\0\0\23\0\0\0\23\0\0\0\23\0\0\0\23\0\0\0\23\0\0\0\24\0\0\0\23\0\0\0\26\0\0\0\0\0\0\0\0\0\0\0" },
     loaded = true,
     path = "/home/sir/.local/share/nvim/site/pack/packer/start/hop.nvim",
     url = "https://github.com/phaazon/hop.nvim"
@@ -132,7 +137,7 @@ _G.packer_plugins = {
     url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-tree.lua"] = {
-    config = { "\27LuaQ\0\1\4\b\4\b\0!\0\0\0\0\0\0\0@/home/sir/.config/nvim/init.lua\0%\0\0\0%\0\0\0\0\0\0\2\a\0\0\0\5\0\0\0A@\0\0\28\0\1\6@\0J\0\0\0\28@\0\1\30\0\0\3\0\0\0\4\b\0\0\0\0\0\0\0require\0\4\n\0\0\0\0\0\0\0nvim-tree\0\4\6\0\0\0\0\0\0\0setup\0\0\0\0\0\a\0\0\0%\0\0\0%\0\0\0%\0\0\0%\0\0\0%\0\0\0%\0\0\0%\0\0\0\0\0\0\0\0\0\0\0" },
+    config = { "\27LuaQ\0\1\4\b\4\b\0!\0\0\0\0\0\0\0@/home/sir/.config/nvim/init.lua\0#\0\0\0%\0\0\0\0\0\0\2\a\0\0\0\5\0\0\0A@\0\0\28\0\1\6@\0J\0\0\0\28@\0\1\30\0\0\3\0\0\0\4\b\0\0\0\0\0\0\0require\0\4\n\0\0\0\0\0\0\0nvim-tree\0\4\6\0\0\0\0\0\0\0setup\0\0\0\0\0\a\0\0\0$\0\0\0$\0\0\0$\0\0\0$\0\0\0$\0\0\0$\0\0\0%\0\0\0\0\0\0\0\0\0\0\0" },
     loaded = true,
     path = "/home/sir/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
     url = "https://github.com/kyazdani42/nvim-tree.lua"
@@ -151,6 +156,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/sir/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
+  },
+  playground = {
+    loaded = true,
+    path = "/home/sir/.local/share/nvim/site/pack/packer/start/playground",
+    url = "https://github.com/nvim-treesitter/playground"
   },
   ["plenary.nvim"] = {
     loaded = true,
@@ -172,11 +182,11 @@ _G.packer_plugins = {
 time([[Defining packer_plugins]], false)
 -- Config for: hop.nvim
 time([[Config for hop.nvim]], true)
-try_loadstring("\27LuaQ\0\1\4\b\4\b\0!\0\0\0\0\0\0\0@/home/sir/.config/nvim/init.lua\0\24\0\0\0\27\0\0\0\0\0\0\2\b\0\0\0\5\0\0\0A@\0\0\28\0\1\6@\0J@\0\0I\0ﾁ―28@\0\1\30\0\0\5\0\0\0\4\b\0\0\0\0\0\0\0require\0\4\4\0\0\0\0\0\0\0hop\0\4\6\0\0\0\0\0\0\0setup\0\4\5\0\0\0\0\0\0\0keys\0\4\24\0\0\0\0\0\0\0etovxqpdygfblzhckisuran\0\0\0\0\0\b\0\0\0\26\0\0\0\26\0\0\0\26\0\0\0\26\0\0\0\26\0\0\0\26\0\0\0\26\0\0\0\27\0\0\0\0\0\0\0\0\0\0\0", "config", "hop.nvim")
+try_loadstring("\27LuaQ\0\1\4\b\4\b\0!\0\0\0\0\0\0\0@/home/sir/.config/nvim/init.lua\0\21\0\0\0\26\0\0\0\0\0\0\2\b\0\0\0\5\0\0\0A@\0\0\28\0\1\6@\0J@\0\0I\0ﾁ―28@\0\1\30\0\0\5\0\0\0\4\b\0\0\0\0\0\0\0require\0\4\4\0\0\0\0\0\0\0hop\0\4\6\0\0\0\0\0\0\0setup\0\4\5\0\0\0\0\0\0\0keys\0\4\24\0\0\0\0\0\0\0etovxqpdygfblzhckisuran\0\0\0\0\0\b\0\0\0\23\0\0\0\23\0\0\0\23\0\0\0\23\0\0\0\23\0\0\0\24\0\0\0\23\0\0\0\26\0\0\0\0\0\0\0\0\0\0\0", "config", "hop.nvim")
 time([[Config for hop.nvim]], false)
 -- Config for: nvim-tree.lua
 time([[Config for nvim-tree.lua]], true)
-try_loadstring("\27LuaQ\0\1\4\b\4\b\0!\0\0\0\0\0\0\0@/home/sir/.config/nvim/init.lua\0%\0\0\0%\0\0\0\0\0\0\2\a\0\0\0\5\0\0\0A@\0\0\28\0\1\6@\0J\0\0\0\28@\0\1\30\0\0\3\0\0\0\4\b\0\0\0\0\0\0\0require\0\4\n\0\0\0\0\0\0\0nvim-tree\0\4\6\0\0\0\0\0\0\0setup\0\0\0\0\0\a\0\0\0%\0\0\0%\0\0\0%\0\0\0%\0\0\0%\0\0\0%\0\0\0%\0\0\0\0\0\0\0\0\0\0\0", "config", "nvim-tree.lua")
+try_loadstring("\27LuaQ\0\1\4\b\4\b\0!\0\0\0\0\0\0\0@/home/sir/.config/nvim/init.lua\0#\0\0\0%\0\0\0\0\0\0\2\a\0\0\0\5\0\0\0A@\0\0\28\0\1\6@\0J\0\0\0\28@\0\1\30\0\0\3\0\0\0\4\b\0\0\0\0\0\0\0require\0\4\n\0\0\0\0\0\0\0nvim-tree\0\4\6\0\0\0\0\0\0\0setup\0\0\0\0\0\a\0\0\0$\0\0\0$\0\0\0$\0\0\0$\0\0\0$\0\0\0$\0\0\0%\0\0\0\0\0\0\0\0\0\0\0", "config", "nvim-tree.lua")
 time([[Config for nvim-tree.lua]], false)
 if should_profile then save_profiles() end
 

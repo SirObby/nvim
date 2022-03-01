@@ -17,7 +17,7 @@ require('packer').startup(function()
 
     use {
         'phaazon/hop.nvim',
-        branch = 'v1', -- optional but strongly recommended
+        branch = 'master', -- optional but strongly recommended
         config = function()
             -- you can configure Hop the way you like here; see :h hop-config
             require'hop'.setup {
@@ -58,6 +58,9 @@ require('packer').startup(function()
 
     use 'github/copilot.vim'
     -- use 'mhartington/formatter.nvim'
+		
+		use 'nvim-treesitter/playground'
+
 end)
 
 require'lspconfig'.pyright.setup {}
@@ -110,10 +113,10 @@ vim.cmd([[
 
   set guifont=LiberationMono\ NF:h9
 
-  "nnoremap <silent> <leader>f :Format<CR>
+  nnoremap <silent> <leader>ff :lua vim.lsp.buf.formatting()<CR>
 
   " system clipboard
-	nmap <c-c> "+y
+    nmap <c-c> "+y
 	vmap <c-c> "+y
 	nmap <c-v> "+p
 	inoremap <c-v> <c-r>+
@@ -121,7 +124,7 @@ vim.cmd([[
 	" use <c-r> to insert original character without triggering things like auto-pairs
 	inoremap <c-r> <c-v>
 
-	NvimTreeOpen
+	"NvimTreeOpen
   
 ]])
 
@@ -393,3 +396,9 @@ cmp.setup.cmdline('/', {
 --  capabilities = capabilities
 
 --vim.lsp.buf.formatting()
+
+require'hop'.setup { jump_on_sole_occurrence = false }
+
+vim.cmd([[
+NvimTreeOpen
+]])
