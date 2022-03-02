@@ -125,6 +125,9 @@ vim.cmd([[
 	inoremap <c-r> <c-v>
 
 	"NvimTreeOpen
+
+	"set wrap
+	set whichwrap+=<,>,h,l,[,]
   
 ]])
 
