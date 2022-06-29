@@ -26,7 +26,10 @@ require('packer').startup(function()
         end
     }
 
-    use 'neovim/nvim-lspconfig'
+use {
+    "williamboman/nvim-lsp-installer",
+    "neovim/nvim-lspconfig",
+}
 
     use {
         'kyazdani42/nvim-tree.lua',
@@ -61,7 +64,52 @@ require('packer').startup(function()
 		
 		use 'nvim-treesitter/playground'
 
+		-- User interface
+use {
+  "stevearc/dressing.nvim",
+  event = "BufEnter",
+  config = function()
+    require("dressing").setup {
+      select = {
+        backend = { "telescope", "fzf", "builtin" },
+      },
+    }
+  end,
+}
+
+	use {
+  'nvim-telescope/telescope.nvim',
+  requires = { {'nvim-lua/plenary.nvim'} }
+}
+
+use {'shadmansaleh/IRC.nvim', rocks = 'openssl',
+}
+
 end)
+
+require("nvim-lsp-installer").setup({
+    automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
+    ui = {
+        icons = {
+            server_installed = "✓",
+            server_pending = "➜",
+            server_uninstalled = "✗"
+        }
+    }
+})
+
+  require'irc'.setup({
+      servers = {
+        libera = {
+          nick = 'sirobsidian',
+          username = 'sirobsidian',
+          server = 'irc.libera.chat',
+          port = 6667,
+          use_ssl = true,
+        },
+      },
+      statusline = true,
+    })
 
 require'lspconfig'.pyright.setup {}
 -- require'lspconfig'.ccls.setup {}
@@ -113,7 +161,7 @@ vim.cmd([[
 
   set guifont=LiberationMono\ NF:h9
 
-  nnoremap <silent> <leader>ff :lua vim.lsp.buf.formatting()<CR>
+  "nnoremap <silent> <leader>ff :lua vim.lsp.buf.formatting()<CR>
 
   " system clipboard
     nmap <c-c> "+y
@@ -128,6 +176,14 @@ vim.cmd([[
 
 	"set wrap
 	set whichwrap+=<,>,h,l,[,]
+
+	" Find files using Telescope command-line sugar.
+	"nnoremap <leader>ff <cmd>Telescope find_files<cr>
+	"nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+	"nnoremap <leader>fb <cmd>Telescope buffers<cr>
+	"nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+	" Using Lua functions
   
 ]])
 
@@ -208,7 +264,7 @@ require('lualine').setup()
 
 require'nvim-treesitter.configs'.setup {
     -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-    ensure_installed = "maintained",
+    ensure_installed = "all",
 
     -- Install languages synchronously (only applied to `ensure_installed`)
     sync_install = false,
@@ -221,7 +277,7 @@ require'nvim-treesitter.configs'.setup {
         enable = true,
 
         -- list of language that will be disabled
-        disable = {"c", "rust"},
+        --disable = {"c", "rust"},
 
         -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
         -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -283,12 +339,14 @@ null_ls.setup({
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = {
     noremap = true,
-    silent = true
+    silent = false
 }
 vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+
+
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -311,7 +369,9 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'Ff', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+
+
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
@@ -402,6 +462,51 @@ cmp.setup.cmdline('/', {
 
 require'hop'.setup { jump_on_sole_occurrence = false }
 
+require('telescope').setup{
+  defaults = {
+    -- Default configuration for telescope goes here:
+    -- config_key = value,
+    mappings = {
+      i = {
+        -- map actions.which_key to <C-h> (default: <C-/>)
+        -- actions.which_key shows the mappings for your picker,
+        -- e.g. git_{create, delete, ...}_branch for the git_branches picker
+        ["<C-h>"] = "which_key"
+      }
+    }
+  },
+  pickers = {
+    -- Default configuration for builtin pickers goes here:
+    -- picker_name = {
+    --   picker_config_key = value,
+    --   ...
+    -- }
+    -- Now the picker_config_key will be applied every time you call this
+    -- builtin picker
+  },
+  extensions = {
+    -- Your extension configuration goes here:
+    -- extension_name = {
+    --   extension_config_key = value,
+    -- }
+    -- please take a look at the readme of the extension you want to configure
+  }
+}
+
+
+vim.api.nvim_set_keymap('n', 'ff', '<cmd>lua require("telescope.builtin").find_files()<CR>', opts)
+vim.api.nvim_set_keymap('n', 'fg', '<cmd>lua require("telescope.builtin").live_grep()<CR>', opts)
+vim.api.nvim_set_keymap('n', 'fb', '<cmd>lua require("telescope.builtin").buffers()<CR>', opts)
+vim.api.nvim_set_keymap('n', 'fh', '<cmd>lua require("telescope.builtin").help_tags()<CR>', opts)
+
 vim.cmd([[
-NvimTreeOpen
+
+" Using Lua functions
+"nnoremap ff <leader> lua require('telescope.builtin').find_files()
+"nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()
+"nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()
+"nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()
+
+"terminal
+vnew term://bash
 ]])
