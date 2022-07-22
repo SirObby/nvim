@@ -85,6 +85,8 @@ use {
 use {'shadmansaleh/IRC.nvim', rocks = 'openssl',
 }
 
+use 'folke/tokyonight.nvim'
+
 end)
 
 require("nvim-lsp-installer").setup({
@@ -149,7 +151,8 @@ require'lspconfig'.sumneko_lua.setup {
 -- require('formatter').setup(...)
 
 vim.cmd([[
-  colorscheme ghdark
+  "colorscheme ghdark
+	colorscheme tokyonight
 
   set mouse=a
   set number
@@ -508,5 +511,5 @@ vim.cmd([[
 "nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()
 
 "terminal
-vnew term://bash
+"vnew term://bash
 ]])
