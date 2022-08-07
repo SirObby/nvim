@@ -11,7 +11,7 @@ local no_errors, error_msg = pcall(function()
 
   local time
   local profile_info
-  local should_profile = true
+  local should_profile = false
   if should_profile then
     local hrtime = vim.loop.hrtime
     profile_info = {}
@@ -44,6 +44,15 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
+local package_path_str = "/home/sir/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/home/sir/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/home/sir/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/home/sir/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/sir/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+if not string.find(package.path, package_path_str, 1, true) then
+  package.path = package.path .. ';' .. package_path_str
+end
+
+if not string.find(package.cpath, install_cpath_pattern, 1, true) then
+  package.cpath = package.cpath .. ';' .. install_cpath_pattern
+end
 
 time([[Luarocks path setup]], false)
 time([[try_loadstring definition]], true)
@@ -60,134 +69,44 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["cmp-buffer"] = {
+  LuaSnip = {
     loaded = true,
-    path = "/home/sir/.local/share/nvim/site/pack/packer/start/cmp-buffer",
-    url = "https://github.com/hrsh7th/cmp-buffer"
-  },
-  ["cmp-calc"] = {
-    loaded = true,
-    path = "/home/sir/.local/share/nvim/site/pack/packer/start/cmp-calc",
-    url = "https://github.com/hrsh7th/cmp-calc"
-  },
-  ["cmp-emoji"] = {
-    loaded = true,
-    path = "/home/sir/.local/share/nvim/site/pack/packer/start/cmp-emoji",
-    url = "https://github.com/hrsh7th/cmp-emoji"
-  },
-  ["cmp-look"] = {
-    loaded = true,
-    path = "/home/sir/.local/share/nvim/site/pack/packer/start/cmp-look",
-    url = "https://github.com/octaltree/cmp-look"
+    path = "/home/sir/.local/share/nvim/site/pack/packer/start/LuaSnip",
+    url = "https://github.com/L3MON4D3/LuaSnip"
   },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "/home/sir/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
-  ["cmp-nvim-lua"] = {
+  cmp_luasnip = {
     loaded = true,
-    path = "/home/sir/.local/share/nvim/site/pack/packer/start/cmp-nvim-lua",
-    url = "https://github.com/hrsh7th/cmp-nvim-lua"
-  },
-  ["cmp-nvim-ultisnips"] = {
-    loaded = true,
-    path = "/home/sir/.local/share/nvim/site/pack/packer/start/cmp-nvim-ultisnips",
-    url = "https://github.com/quangnguyen30192/cmp-nvim-ultisnips"
-  },
-  ["cmp-path"] = {
-    loaded = true,
-    path = "/home/sir/.local/share/nvim/site/pack/packer/start/cmp-path",
-    url = "https://github.com/hrsh7th/cmp-path"
-  },
-  ["cmp-spell"] = {
-    loaded = true,
-    path = "/home/sir/.local/share/nvim/site/pack/packer/start/cmp-spell",
-    url = "https://github.com/f3fora/cmp-spell"
-  },
-  ["copilot.vim"] = {
-    loaded = true,
-    path = "/home/sir/.local/share/nvim/site/pack/packer/start/copilot.vim",
-    url = "https://github.com/github/copilot.vim"
-  },
-  ["hop.nvim"] = {
-    config = { "\27LuaQ\0\1\4\b\4\b\0!\0\0\0\0\0\0\0@/home/sir/.config/nvim/init.lua\0\21\0\0\0\26\0\0\0\0\0\0\2\b\0\0\0\5\0\0\0A@\0\0\28Ä\0\1\6Ä@\0J@\0\0I\0¡Å\28@\0\1\30\0Ä\0\5\0\0\0\4\b\0\0\0\0\0\0\0require\0\4\4\0\0\0\0\0\0\0hop\0\4\6\0\0\0\0\0\0\0setup\0\4\5\0\0\0\0\0\0\0keys\0\4\24\0\0\0\0\0\0\0etovxqpdygfblzhckisuran\0\0\0\0\0\b\0\0\0\23\0\0\0\23\0\0\0\23\0\0\0\23\0\0\0\23\0\0\0\24\0\0\0\23\0\0\0\26\0\0\0\0\0\0\0\0\0\0\0" },
-    loaded = true,
-    path = "/home/sir/.local/share/nvim/site/pack/packer/start/hop.nvim",
-    url = "https://github.com/phaazon/hop.nvim"
-  },
-  ["lualine.nvim"] = {
-    loaded = true,
-    path = "/home/sir/.local/share/nvim/site/pack/packer/start/lualine.nvim",
-    url = "https://github.com/nvim-lualine/lualine.nvim"
-  },
-  ["null-ls.nvim"] = {
-    loaded = true,
-    path = "/home/sir/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
-    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
+    path = "/home/sir/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
+    url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/home/sir/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
+  ["nvim-lsp-installer"] = {
+    loaded = true,
+    path = "/home/sir/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer",
+    url = "https://github.com/williamboman/nvim-lsp-installer"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/sir/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
-  ["nvim-tree.lua"] = {
-    config = { "\27LuaQ\0\1\4\b\4\b\0!\0\0\0\0\0\0\0@/home/sir/.config/nvim/init.lua\0#\0\0\0%\0\0\0\0\0\0\2\a\0\0\0\5\0\0\0A@\0\0\28Ä\0\1\6Ä@\0J\0\0\0\28@\0\1\30\0Ä\0\3\0\0\0\4\b\0\0\0\0\0\0\0require\0\4\n\0\0\0\0\0\0\0nvim-tree\0\4\6\0\0\0\0\0\0\0setup\0\0\0\0\0\a\0\0\0$\0\0\0$\0\0\0$\0\0\0$\0\0\0$\0\0\0$\0\0\0%\0\0\0\0\0\0\0\0\0\0\0" },
-    loaded = true,
-    path = "/home/sir/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
-    url = "https://github.com/kyazdani42/nvim-tree.lua"
-  },
-  ["nvim-treesitter"] = {
-    loaded = true,
-    path = "/home/sir/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
-    url = "https://github.com/nvim-treesitter/nvim-treesitter"
-  },
-  ["nvim-web-devicons"] = {
-    loaded = true,
-    path = "/home/sir/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
-    url = "https://github.com/kyazdani42/nvim-web-devicons"
-  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/home/sir/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
-  },
-  playground = {
-    loaded = true,
-    path = "/home/sir/.local/share/nvim/site/pack/packer/start/playground",
-    url = "https://github.com/nvim-treesitter/playground"
-  },
-  ["plenary.nvim"] = {
-    loaded = true,
-    path = "/home/sir/.local/share/nvim/site/pack/packer/start/plenary.nvim",
-    url = "https://github.com/nvim-lua/plenary.nvim"
-  },
-  ultisnips = {
-    loaded = true,
-    path = "/home/sir/.local/share/nvim/site/pack/packer/start/ultisnips",
-    url = "https://github.com/SirVer/ultisnips"
-  },
-  ["vim-github-dark"] = {
-    loaded = true,
-    path = "/home/sir/.local/share/nvim/site/pack/packer/start/vim-github-dark",
-    url = "https://github.com/wojciechkepka/vim-github-dark"
   }
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: hop.nvim
-time([[Config for hop.nvim]], true)
-try_loadstring("\27LuaQ\0\1\4\b\4\b\0!\0\0\0\0\0\0\0@/home/sir/.config/nvim/init.lua\0\21\0\0\0\26\0\0\0\0\0\0\2\b\0\0\0\5\0\0\0A@\0\0\28Ä\0\1\6Ä@\0J@\0\0I\0¡Å\28@\0\1\30\0Ä\0\5\0\0\0\4\b\0\0\0\0\0\0\0require\0\4\4\0\0\0\0\0\0\0hop\0\4\6\0\0\0\0\0\0\0setup\0\4\5\0\0\0\0\0\0\0keys\0\4\24\0\0\0\0\0\0\0etovxqpdygfblzhckisuran\0\0\0\0\0\b\0\0\0\23\0\0\0\23\0\0\0\23\0\0\0\23\0\0\0\23\0\0\0\24\0\0\0\23\0\0\0\26\0\0\0\0\0\0\0\0\0\0\0", "config", "hop.nvim")
-time([[Config for hop.nvim]], false)
--- Config for: nvim-tree.lua
-time([[Config for nvim-tree.lua]], true)
-try_loadstring("\27LuaQ\0\1\4\b\4\b\0!\0\0\0\0\0\0\0@/home/sir/.config/nvim/init.lua\0#\0\0\0%\0\0\0\0\0\0\2\a\0\0\0\5\0\0\0A@\0\0\28Ä\0\1\6Ä@\0J\0\0\0\28@\0\1\30\0Ä\0\3\0\0\0\4\b\0\0\0\0\0\0\0require\0\4\n\0\0\0\0\0\0\0nvim-tree\0\4\6\0\0\0\0\0\0\0setup\0\0\0\0\0\a\0\0\0$\0\0\0$\0\0\0$\0\0\0$\0\0\0$\0\0\0$\0\0\0%\0\0\0\0\0\0\0\0\0\0\0", "config", "nvim-tree.lua")
-time([[Config for nvim-tree.lua]], false)
 if should_profile then save_profiles() end
 
 end)
