@@ -19,9 +19,20 @@ require('packer').startup(function()
 	requires = { {'nvim-lua/plenary.nvim'} }
   }
 
+  use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'
+  }
+
+  use {
+  	'nvim-lualine/lualine.nvim',
+  	requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  }
+
 
 end)
 
+require('lualine').setup()
 local lsp_installer = require("nvim-lsp-installer")
 
 
@@ -104,7 +115,10 @@ cmp.setup {
 
 vim.api.nvim_set_option("mouse", "a")
 vim.cmd ("set number") -- can't use vim.api for this for some reason.
-
+vim.cmd ("set autoindent")
+vim.api.nvim_set_option("tabstop", 2)
+vim.api.nvim_set_option("shiftwidth", 2)
+vim.api.nvim_set_option("softtabstop", 2)
 
 -- Colorscheme
 
